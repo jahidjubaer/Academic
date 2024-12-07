@@ -50,9 +50,44 @@ Welcome to the **Jahid Worlds** project repository! This application is designed
 
 ### Prerequisites  
 Ensure the following tools are installed:  
-- Node.js (v16.x or higher).  
+- Node.js
 - MongoDB (Local or cloud-based).  
 
 Clone the repository:  
 ```bash
-git clone https://github.com/jahidjubaer/Academic/tree/master/Web_Programming/Project/Jahid_Worlds
+git clone https://github.com/jahidjubaer/Academic/tree/master/Web_Programming/Project/Jahid_Worlds```
+
+Installation
+Navigate to the project directory:
+
+bash
+Copy code
+cd Jahid_Worlds
+Install dependencies:
+
+bash
+Copy code
+npm install
+Set up environment variables:
+
+Create a .env.local file in the root directory.
+Add the following variables:
+env
+Copy code
+MONGODB_URI=your_mongodb_connection_string
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+Start the development server:
+
+bash
+Copy code
+npm run dev
+Access the application at http://localhost:3000.
+
+Screenshots
+
+Contributing
+Jahid Hasan
+ID : 222-115-116
+
+
