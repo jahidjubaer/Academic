@@ -86,8 +86,21 @@ Access the application at http://localhost:3000.
 
 ---
 
-## Screenshots
+## Demo
+### Home Page
+![Home Page](https://github.com/user-attachments/assets/7493f430-ac5f-4319-a162-335f9b619b55)
 
+### Card Page
+![Card Page](https://github.com/user-attachments/assets/c96326ec-24a8-4120-a766-6ce1bd9251a6)
+
+### Payment
+![Payment](https://github.com/user-attachments/assets/6eea5c5d-d606-4383-b8ae-49f5d6e83668)
+
+### Order Confirmation
+![Order Confirmation](https://github.com/user-attachments/assets/1df4153a-5974-4cda-bb72-072b824bd45d)
+
+### Database Update 
+![Database Update](https://github.com/user-attachments/assets/bddf7e0e-a198-47d9-a429-966bda4a7a82)
 
 ---
 
