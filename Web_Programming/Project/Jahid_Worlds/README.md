@@ -1,6 +1,6 @@
 # Jahid Worlds Project  
 
-Welcome to the **Jahid Worlds** project repository! This application is designed for offline smart shopping, where customers can browse a menu and make purchases seamlessly, much like a POS (Point of Sale) system.  
+Welcome to the **Jahid Worlds** project repository! This application is designed for smart shopping, where customers can browse a menu and make purchases seamlessly, much like a POS (Point of Sale) system.  
 
 ---
 
