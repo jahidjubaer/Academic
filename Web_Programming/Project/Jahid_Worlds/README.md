@@ -8,7 +8,7 @@ Welcome to the **Jahid Worlds** project repository! This application is designed
 
 ### Front-End  
 - **Frameworks/Libraries**: Next.js, React.js, and Tailwind CSS.  
-- **Features**: Modern, responsive design with a focus on ease of use for offline shopping.  
+- **Features**: Modern, responsive design with a focus on ease of use for shopping.  
 
 ### Back-End  
 - **Technologies**: Next.js (API Routes for server-side logic).  
@@ -30,7 +30,7 @@ Welcome to the **Jahid Worlds** project repository! This application is designed
   - A visually appealing menu for products.  
   - Includes product details like descriptions, prices, and categories.  
 
-- **Offline-Friendly Design**:  
+- **Friendly Design**:  
   - Optimized for in-store use with responsive components.  
 
 - **Order Management**:  
