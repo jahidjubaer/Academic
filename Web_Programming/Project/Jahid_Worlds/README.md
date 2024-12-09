@@ -58,29 +58,39 @@ Ensure the following tools are installed:
 
 ### Clone the repository:  
 
-`git clone https://github.com/jahidjubaer/Academic/tree/master/Web_Programming/Project/Jahid_Worlds`
+```bash
+git clone https://github.com/jahidjubaer/Academic/tree/master/Web_Programming/Project/Jahid_Worlds
+```
 
 
 ### Navigate to the project directory:
 
-`cd Jahid_Worlds`
+```bash
+cd Jahid_Worlds
+```
 
 
 ### Install dependencies:
 
-`npm install`
+```bash
+npm install
+```
 
 ### Set up environment variables:
 
 Create a .env.local file in the root directory.
 Add the following variables:
 
-```MONGODB_URI=your_mongodb_connection_string```
-```STRIPE_SECRET_KEY=your_stripe_secret_key```
-```NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key```
+```
+MONGODB_URI=your_mongodb_connection_string
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+```
 
 ### Start the development server:
-```npm run dev```
+```bash
+npm run dev
+```
 
 Access the application at http://localhost:3000.
 
