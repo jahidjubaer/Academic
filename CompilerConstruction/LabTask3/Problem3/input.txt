@@ -1,0 +1,13 @@
+int main()
+{
+    int count = 0;
+    float total = 0.0;
+
+    while (count < 4) {
+        total += 2.5;
+        count++;
+    }
+
+    printf("Total: %.2f", total);
+    return 0;
+}

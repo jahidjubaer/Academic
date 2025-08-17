@@ -1,0 +1,12 @@
+int main()
+{
+    int num = 7;
+    char grade = 'A';
+
+    if (num % 2 == 1) {
+        printf("Odd number: %d\n", num);
+    }
+
+    printf("Grade: %c\n", grade);
+    return 0;
+}
