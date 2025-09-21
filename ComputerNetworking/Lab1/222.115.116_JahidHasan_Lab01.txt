@@ -1,0 +1,42 @@
+enable
+erase startup-config
+reload
+# Enter configuration mode
+configure terminal
+hostname R2
+no ip domain-lookup
+enable secret class
+banner motd & 
+********************************
+!!!AUTHORIZED ACCESS ONLY!!!
+********************************
+&
+line console 0
+password cisco
+login
+exit
+line vty 0 4
+password cisco
+login
+exit
+interface serial 0/0/0
+ip address 192.168.2.2 255.255.255.0
+no shutdown
+interface fastethernet 0/0
+ip address 192.168.3.1 255.255.255.0
+no shutdown
+end
+copy running-config startup-config
+
+
+Host PC Configurations
+
+PC1:
+IP: 192.168.1.10
+Subnet: 255.255.255.0
+Gateway: 192.168.1.1
+
+PC2:
+IP: 192.168.3.10
+Subnet: 255.255.255.0
+Gateway: 192.168.3.1

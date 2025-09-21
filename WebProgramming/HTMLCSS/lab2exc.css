@@ -1,0 +1,27 @@
+.main{
+    text-align: center;
+    h1{
+        color:cadetblue;
+        padding-top: 0px;
+    }
+    p{
+        color: rgb(21, 131, 134);
+        margin-top: 0px;
+        padding-top: 0%;
+    }
+}
+
+.container{
+    width: 80%;
+    margin: auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #127e6f85;
+}
+
+.Box{
+    background-color: #e0f7fa;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #00796b;
+}

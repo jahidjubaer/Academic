@@ -1,0 +1,52 @@
+/* Global Styles */
+body {
+    background-color: #0d0d0d;
+    color: white;
+}
+
+.hero {
+    min-height: 100vh;
+    padding: 100px 0;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 36px;
+    color: cyan;
+}
+
+.highlight {
+    color: cyan;
+}
+
+.socials a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.socials a:hover {
+    color: cyan;
+}
+
+.btn-primary {
+    background-color: cyan;
+    border-color: cyan;
+    color: black;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.btn-primary:hover {
+    background-color: darkcyan;
+    border-color: darkcyan;
+}
+
+.img-fluid {
+    max-width: 400px;
+}

@@ -1,0 +1,50 @@
+.container{
+    border: 1px solid beige;
+    width: 90%;
+    background-color: aliceblue;
+    margin: auto;
+    padding: 20px;
+    padding-top: 20px;
+    
+}
+.box{
+    border: 1px solid green ;
+    padding: 20px;
+    margin: 20px;
+    background-color: ghostwhite;
+}
+
+ul{
+    list-style-type: circle;
+    padding-left: 20px;
+}
+
+ol{
+    list-style-type: upper-roman;
+    padding-left: 20px;
+}
+li{
+    margin-bottom: 20px;
+}
+
+table{
+    border-collapse: collapse;
+    margin-top: 20px;
+    h2{
+        text-align: center;
+    }
+    width: 100%;
+    td{
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd
+    }
+    th{
+        padding: 10px;
+        background-color: green;
+    }
+
+    tr :hover{
+        background-color: antiquewhite;
+    }
+}

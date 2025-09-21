@@ -1,0 +1,22 @@
+/* Style for the portfolio website */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 5px 0;
+}
+
+section {
+    margin-bottom: 50px;
+}

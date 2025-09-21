@@ -1,0 +1,22 @@
+body{
+    border: 40px;
+    margin: 40px;
+    background-color: aqua;
+    font-family: 'Times New Roman', Times, serif;
+    padding: auto;
+}
+
+h1{
+
+}
+
+p{
+    color: black;
+    text-align: justify;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+    text-decoration: wavy;
+}
