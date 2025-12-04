@@ -1,0 +1,123 @@
+#Gibbs sampler:
+import random
+
+def build_count_matrix_with_pseudocounts(motifs: list[str], k: int, pseudo: int = 1) -> list[list[int]]:
+    counts = [[pseudo]*k for _ in range(4)]
+    for motif in motifs:
+        for i in range(k):
+            nucleotide = motif[i]
+            if nucleotide == 'A':
+                counts[0][i] += 1
+            elif nucleotide == 'C':
+                counts[1][i] += 1
+            elif nucleotide == 'G':
+                counts[2][i] += 1
+            elif nucleotide == 'T':
+                counts[3][i] += 1
+    return counts
+
+
+def convert_counts_to_profile(counts: list[list[int]], t_effective: int) -> list[list[float]]:
+    k = len(counts[0])
+    profile = [[0.0]*k for _ in range(4)]
+    for row in range(4):
+        for col in range(k):
+            profile[row][col] = counts[row][col] / (t_effective + 4)
+    return profile
+
+
+def compute_kmer_probability(kmer: str, profile: list[list[float]]) -> float:
+    prob = 1.0
+    for i, nucleotide in enumerate(kmer):
+        if nucleotide == 'A':
+            prob *= profile[0][i]
+        elif nucleotide == 'C':
+            prob *= profile[1][i]
+        elif nucleotide == 'G':
+            prob *= profile[2][i]
+        elif nucleotide == 'T':
+            prob *= profile[3][i]
+    return prob
+
+
+def weighted_random_choice(sequence: str, k: int, profile: list[list[float]]) -> str:
+    candidates = [sequence[i:i+k] for i in range(len(sequence)-k+1)]
+    weights = [compute_kmer_probability(kmer, profile) for kmer in candidates]
+    total_weight = sum(weights)
+
+    if total_weight == 0:
+        return random.choice(candidates)
+
+    normalized_weights = [w/total_weight for w in weights]
+
+    r = random.random()
+    cumulative = 0.0
+    for kmer, w in zip(candidates, normalized_weights):
+        cumulative += w
+        if r <= cumulative:
+            return kmer
+
+    return candidates[-1]
+
+
+def calculate_motifs_score(motifs: list[str], k: int) -> int:
+    t = len(motifs)
+    total = 0
+    for i in range(k):
+        counts = {'A':0, 'C':0, 'G':0, 'T':0}
+        for motif in motifs:
+            counts[motif[i]] += 1
+        total += (t - max(counts.values()))
+    return total
+
+
+def gibbs_sampler_algorithm(sequences: list[str], k: int, iterations: int = 2000) -> tuple[list[str], int]:
+    t = len(sequences)
+
+    # FIXED INITIALIZATION
+    motifs = []
+    for seq in sequences:
+        start = random.randint(0, len(seq) - k)
+        motifs.append(seq[start:start + k])
+
+    best_motifs = motifs[:]
+    best_score = calculate_motifs_score(best_motifs, k)
+
+    for _ in range(iterations):
+        idx_to_remove = random.randint(0, t-1)
+        removed = motifs.pop(idx_to_remove)
+        count_matrix = build_count_matrix_with_pseudocounts(motifs, k)
+        profile = convert_counts_to_profile(count_matrix, len(motifs))
+        new_kmer = weighted_random_choice(sequences[idx_to_remove], k, profile)
+        motifs.insert(idx_to_remove, new_kmer)
+        current_score = calculate_motifs_score(motifs, k)
+
+        if current_score < best_score:
+            best_score = current_score
+            best_motifs = motifs[:]
+
+    return best_motifs, best_score
+
+
+# ---------------------------
+# STATIC INPUT
+# ---------------------------
+
+k = 3
+iterations = 2
+
+sequences = [
+    "AGCTAGCAGTAC",
+    "AAGCAGTCAGTT",
+    "CAGTCAGCAGCA",
+    "GTCAGCATGCAA",
+    "ACGTCAGCAGTT"
+]
+
+best_motifs, best_score = gibbs_sampler_algorithm(sequences, k, iterations)
+
+print("\nBest Motifs Found:")
+for m in best_motifs:
+    print(m)
+
+print("Score:", best_score)

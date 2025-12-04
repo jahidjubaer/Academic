@@ -1,0 +1,82 @@
+#Greedy Motif Search with Pseudocounts
+def score_motifs(motifs):
+    k = len(motifs[0])
+    t = len(motifs)
+    score = 0
+    for j in range(k):
+        counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
+        for i in range(t):
+            counts[motifs[i][j]] += 1
+        max_count = max(counts.values())
+        score += (t - max_count)
+    return score
+
+def get_profile_with_pseudocounts(motifs):
+    k = len(motifs[0])
+    t = len(motifs)
+
+    profile = {base: [1] * k for base in "ACGT"}
+    
+    for i in range(t):
+        for j in range(k):
+            base = motifs[i][j]
+            profile[base][j] += 1
+            
+   
+    for j in range(k):
+        col_sum = sum(profile[base][j] for base in "ACGT")
+        for base in "ACGT":
+            profile[base][j] /= col_sum
+    return profile
+
+def profile_most_probable_kmer(text, k, profile):
+    max_prob = -1
+    best_kmer = text[:k]
+    
+    for i in range(len(text) - k + 1):
+        kmer = text[i : i + k]
+        prob = 1
+        for j in range(k):
+            prob *= profile[kmer[j]][j]
+        
+        if prob > max_prob:
+            max_prob = prob
+            best_kmer = kmer
+    return best_kmer
+
+def greedy_motif_search_pseudocounts(dna, k, t):
+    best_motifs = [s[:k] for s in dna]
+    
+  
+    first_string = dna[0]
+    for i in range(len(first_string) - k + 1):
+        motif1 = first_string[i : i + k]
+        current_motifs = [motif1]
+        
+        for j in range(1, t):
+           
+            profile = get_profile_with_pseudocounts(current_motifs)
+        
+            next_motif = profile_most_probable_kmer(dna[j], k, profile)
+            current_motifs.append(next_motif)
+        
+        if score_motifs(current_motifs) < score_motifs(best_motifs):
+            best_motifs = current_motifs
+            
+    return best_motifs
+
+
+dna_list = [
+    "GGCGTTCAGGCA",
+    "AAGAATCAGTCA",
+    "CAAGGAGTTCGC",
+    "CACGTCAATCAC",
+    "CAATAATATTCG"
+]
+k_val = 3
+t_val = 5
+
+final_motifs = greedy_motif_search_pseudocounts(dna_list, k_val, t_val)
+print("Sample Output:")
+for m in final_motifs:
+    print(m)

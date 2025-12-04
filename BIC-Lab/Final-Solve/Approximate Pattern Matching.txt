@@ -1,0 +1,27 @@
+#. Approximate Pattern Matching
+def hamming_distance(p, q):
+    count = 0
+    for c1, c2 in zip(p, q):
+        if c1 != c2:
+            count += 1
+    return count
+
+def approximate_pattern_matching(pattern, text, d):
+    positions = []
+    len_p = len(pattern)
+    len_t = len(text)
+    
+    for i in range(len_t - len_p + 1):
+        substring = text[i : i + len_p]
+        if hamming_distance(pattern, substring) <= d:
+            positions.append(i)
+            
+    return positions
+
+# --- Sample Input from Image ---
+pattern_in = "ATTCTGGA"
+string_in = "CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCA"
+d_val = 3
+
+matches = approximate_pattern_matching(pattern_in, string_in, d_val)
+print("Output:", " ".join(map(str, matches)))

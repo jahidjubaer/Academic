@@ -1,0 +1,92 @@
+#Randomized Motif Search
+
+import random
+
+def score_motifs(motifs):
+    k = len(motifs[0])
+    t = len(motifs)
+    score = 0
+    for j in range(k):
+        counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
+        for i in range(t):
+            counts[motifs[i][j]] += 1
+        max_count = max(counts.values())
+        score += (t - max_count)
+    return score
+
+def get_profile_with_pseudocounts(motifs):
+    k = len(motifs[0])
+    t = len(motifs)
+    profile = {base: [1] * k for base in "ACGT"} 
+    for i in range(t):
+        for j in range(k):
+            profile[motifs[i][j]][j] += 1
+    for j in range(k):
+        col_sum = sum(profile[base][j] for base in "ACGT")
+        for base in "ACGT":
+            profile[base][j] /= col_sum
+    return profile
+
+def motifs_from_profile(profile, dna, k):
+    motifs = []
+    for text in dna:
+        motifs.append(profile_most_probable_kmer(text, k, profile))
+    return motifs
+
+def profile_most_probable_kmer(text, k, profile):
+    max_prob = -1
+    best_kmer = text[:k]
+    for i in range(len(text) - k + 1):
+        kmer = text[i : i + k]
+        prob = 1
+        for j in range(k):
+            prob *= profile[kmer[j]][j]
+        if prob > max_prob:
+            max_prob = prob
+            best_kmer = kmer
+    return best_kmer
+
+def randomized_motif_search_single_run(dna, k, t):
+   
+    motifs = []
+    for text in dna:
+        idx = random.randint(0, len(text) - k)
+        motifs.append(text[idx : idx + k])
+    
+    best_motifs = motifs
+    
+    while True:
+        profile = get_profile_with_pseudocounts(motifs)
+        motifs = motifs_from_profile(profile, dna, k)
+        
+        if score_motifs(motifs) < score_motifs(best_motifs):
+            best_motifs = motifs
+        else:
+            return best_motifs
+
+def randomized_motif_search_full(dna, k, t, iterations=1000):
+    best_motifs = randomized_motif_search_single_run(dna, k, t)
+    
+    for _ in range(iterations):
+        current_motifs = randomized_motif_search_single_run(dna, k, t)
+        if score_motifs(current_motifs) < score_motifs(best_motifs):
+            best_motifs = current_motifs
+            
+    return best_motifs
+
+
+dna_list_b = [
+    "GGCGTTCAGGCA",
+    "AAGAATCAGTCA",
+    "CAAGGAGTTCGC",
+    "CACGTCAATCAC",
+    "CAATAATATTCG"
+]
+k_val_b = 3
+t_val_b = 5
+
+
+final_random_motifs = randomized_motif_search_full(dna_list_b, k_val_b, t_val_b)
+print("Sample Output:")
+for m in final_random_motifs:
+    print(m)

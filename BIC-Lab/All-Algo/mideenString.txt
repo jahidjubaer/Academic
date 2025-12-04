@@ -1,0 +1,67 @@
+# ---------------------------
+# Median String (Static Input)
+# ---------------------------
+
+def calculate_hamming(s1: str, s2: str) -> int:
+    return sum(1 for a, b in zip(s1, s2) if a != b)
+
+
+def generate_all_kmers(k: int) -> list[str]:
+    alphabet = ['A', 'C', 'G', 'T']
+    kmers = []
+
+    def build(prefix: str):
+        if len(prefix) == k:
+            kmers.append(prefix)
+            return
+        for ch in alphabet:
+            build(prefix + ch)
+
+    build("")
+    return kmers
+
+
+def minimal_distance_to_sequence(kmer: str, sequence: str) -> int:
+    k = len(kmer)
+    best_distance = float('inf')
+    for i in range(len(sequence) - k + 1):
+        window = sequence[i:i+k]
+        dist = calculate_hamming(kmer, window)
+        if dist < best_distance:
+            best_distance = dist
+    return best_distance
+
+
+def total_distance_to_sequences(kmer: str, sequences: list[str]) -> int:
+    return sum(minimal_distance_to_sequence(kmer, seq) for seq in sequences)
+
+
+def find_median_string(sequences: list[str], k: int) -> tuple[str, int]:
+    all_candidates = generate_all_kmers(k)
+    best_kmer = ""
+    best_score = float('inf')
+
+    for candidate in all_candidates:
+        score = total_distance_to_sequences(candidate, sequences)
+        if score < best_score:
+            best_score = score
+            best_kmer = candidate
+
+    return best_kmer, best_score
+
+
+
+
+k = 3  
+sequences = [
+    "AAATTGACGCAT",
+    "GACGACCACGTT",
+    "CGTCAGCGCCTG",
+    "GCTGAGCACCGG",
+    "AGTACGGGACAG"
+]
+
+median, score = find_median_string(sequences, k)
+
+print("\nMedian String:", median)
+print("Score:", score)

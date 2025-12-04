@@ -1,0 +1,31 @@
+#1. Clump Finding Problem
+def find_clumps(genome, k, L, t):
+    clump_kmers = set()
+    
+  
+    for i in range(len(genome) - L + 1):
+        window = genome[i : i + L]
+        counts = {}
+        
+        
+        for j in range(len(window) - k + 1):
+            kmer = window[j : j + k]
+            if kmer in counts:
+                counts[kmer] += 1
+            else:
+                counts[kmer] = 1
+        
+      
+        for kmer in counts:
+            if counts[kmer] >= t:
+                clump_kmers.add(kmer)
+                
+    return list(clump_kmers)
+
+genome_input = "CGGACTCGACAGATGTGAAGAAATGTGAAGACTGA"
+k_val = 3
+L_val = 20
+t_val = 3
+
+result = find_clumps(genome_input, k_val, L_val, t_val)
+print("Output:", " ".join(result))
